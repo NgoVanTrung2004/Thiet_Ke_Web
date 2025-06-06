@@ -1,48 +1,103 @@
-<!-- heart.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>3D Heart</title>
+  <title>Chào Bae 💖</title>
   <style>
     body {
       margin: 0;
-      background: radial-gradient(ellipse at center, #ff99cc 0%, #ff3366 100%);
+      background: black;
       overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
     }
+
+    .container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1000px;
+    }
+
+    .text {
+      position: absolute;
+      top: 10%;
+      color: #ff66cc;
+      font-size: 3em;
+      text-shadow: 0 0 15px #ff00ff;
+      animation: pulseText 2s infinite;
+    }
+
+    @keyframes pulseText {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.85; }
+    }
+
     .heart {
-      position: absolute;
-      top: 50%;
-      left: 50%;
+      width: 150px;
+      height: 135px;
+      position: relative;
       transform-style: preserve-3d;
-      transform: translate(-50%, -50%) rotateX(20deg) rotateY(0deg);
-      animation: rotate 10s infinite linear;
+      animation: rotate 10s linear infinite;
     }
-    .heart div {
+
+    .heart::before,
+    .heart::after {
+      content: "";
       position: absolute;
-      width: 200px;
-      height: 200px;
-      background: red;
-      transform: rotateY(var(--angle)) translateZ(100px);
-      clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+      top: 0;
+      width: 150px;
+      height: 135px;
+      background: radial-gradient(circle at 30% 30%, #ff69b4, #8a2be2, #000);
+      clip-path: path("M75 130 Q0 80 40 40 Q75 0 110 40 Q150 80 75 130 Z");
+      box-shadow: 0 0 30px #ff69b4, 0 0 60px #8a2be2, 0 0 100px #ff00ff;
+      animation: beat 1s infinite ease-in-out;
     }
+
+    .heart::after {
+      transform: rotateY(180deg);
+    }
+
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
     @keyframes rotate {
-      0%   { transform: translate(-50%, -50%) rotateX(20deg) rotateY(0deg); }
-      100% { transform: translate(-50%, -50%) rotateX(20deg) rotateY(360deg); }
+      from { transform: rotateY(0deg); }
+      to { transform: rotateY(360deg); }
+    }
+
+    /* Galaxy particles */
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      box-shadow:
+        10vw 20vh 2px #fff,
+        30vw 40vh 2px #ff00ff,
+        50vw 10vh 2px #00ffff,
+        70vw 70vh 2px #ffcc00,
+        90vw 30vh 2px #00ffcc,
+        20vw 80vh 2px #cc00ff;
+      animation: twinkle 5s infinite alternate;
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.3; }
+      to { opacity: 0.8; }
     }
   </style>
 </head>
 <body>
-  <div class="heart" id="heart"></div>
-
-  <script>
-    const heart = document.getElementById("heart");
-    const sides = 30;
-    for (let i = 0; i < sides; i++) {
-      const div = document.createElement("div");
-      div.style.setProperty('--angle', `${(360 / sides) * i}deg`);
-      heart.appendChild(div);
-    }
-  </script>
+  <div class="container">
+    <div class="text">Chào Bae 💖</div>
+    <div class="heart"></div>
+    <div class="stars"></div>
+  </div>
 </body>
 </html>
+
