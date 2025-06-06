@@ -1,0 +1,23 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QR Code to 3D Heart</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body style="display: flex; flex-direction: column; align-items: center; margin-top: 100px;">
+  <h1>Quét mã QR để xem trái tim 3D ❤️</h1>
+  <div id="qrcode"></div>
+
+  <script>
+    // Thay đường dẫn này bằng đường dẫn tới file heart.html của bạn sau khi upload lên web
+    var url = "https://yourdomain.com/heart.html"; 
+    new QRCode(document.getElementById("qrcode"), {
+      text: url,
+      width: 256,
+      height: 256
+    });
+  </script>
+</body>
+</html>
